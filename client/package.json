@@ -4,9 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "node ./node_modules/@angular/cli/bin/ng.js build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "vercel-build": "node ./node_modules/@angular/cli/bin/ng.js build --configuration production"
   },
   "prettier": {
     "printWidth": 100,
