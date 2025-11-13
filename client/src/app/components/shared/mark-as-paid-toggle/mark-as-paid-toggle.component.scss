@@ -1,0 +1,13 @@
+.toggle { display: inline-flex; align-items: center; gap: 10px; padding: 8px 10px; min-height: 44px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); color: var(--text); cursor: pointer; user-select: none; transition: background .2s, border-color .2s; }
+.toggle:focus { outline: none; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+.knob { position: relative; width: 36px; height: 20px; background: #e5e7eb; border-radius: 999px; transition: background .2s; }
+.knob::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform .2s; }
+.knob.on { background: rgba(16,185,129,0.25); }
+.knob.on::after { transform: translateX(16px); }
+.icon { font-size: 14px; opacity: .9; }
+.label { font-size: var(--fs-sm); color: var(--text-muted); }
+
+/* Snackbar */
+.snackbar { position: fixed; left: 50%; transform: translateX(-50%); bottom: 20px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); padding: 10px 12px; display: inline-flex; align-items: center; gap: 12px; opacity: 0; transition: opacity .2s, transform .2s; }
+.snackbar.show { opacity: 1; transform: translateX(-50%) translateY(-4px); }
+.snackbar .undo { background: transparent; border: 1px solid var(--border); color: var(--text); padding: 6px 10px; border-radius: var(--radius-sm); cursor: pointer; }

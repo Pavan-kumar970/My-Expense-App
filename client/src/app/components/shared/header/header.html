@@ -1,0 +1,63 @@
+<header class="header">
+  <nav class="header__nav container glass">
+    <div class="brand">
+      <span class="logo" aria-hidden="true"></span>
+      <span>MyExpense</span>
+    </div>
+    <div class="nav-links">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/expenses" routerLinkActive="active">Expenses</a>
+      <a routerLink="/bills" routerLinkActive="active">Bills</a>
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+      <a routerLink="/register" routerLinkActive="active">Register</a>
+    </div>
+    <div class="actions">
+      <button type="button" class="hamburger" (click)="togglePanel()" aria-label="Open settings">
+        <span></span><span></span><span></span>
+      </button>
+      <button type="button" class="btn-logout" (click)="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <aside class="settings-panel" [class.open]="panelOpen" aria-hidden="{{!panelOpen}}">
+    <div class="settings-panel__header">
+      <h3>Settings</h3>
+      <button type="button" class="close" (click)="togglePanel()" aria-label="Close">✕</button>
+    </div>
+    <div class="settings-panel__body">
+      <div class="profile" *ngIf="user as u">
+        <div class="avatar">{{ (u.name || '?')[0] }}</div>
+        <div class="info">
+          <div class="name">{{ u.name }}</div>
+          <div class="email">{{ u.email }}</div>
+        </div>
+      </div>
+
+      <div class="group">
+        <label>Theme</label>
+        <div class="row">
+          <label><input type="radio" name="theme" [(ngModel)]="theme" value="light" (change)="applyTheme()"> Light</label>
+          <label><input type="radio" name="theme" [(ngModel)]="theme" value="dark" (change)="applyTheme()"> Dark</label>
+        </div>
+      </div>
+
+      <div class="group">
+        <label><input type="checkbox" [(ngModel)]="notifications"> Notifications</label>
+      </div>
+
+      <div class="group">
+        <label for="currency">Currency</label>
+        <select id="currency" [(ngModel)]="currency">
+          <option>USD</option>
+          <option>EUR</option>
+          <option>INR</option>
+          <option>GBP</option>
+        </select>
+      </div>
+    </div>
+    <div class="settings-panel__footer">
+      <button class="btn ghost" type="button" (click)="logout()">Logout</button>
+      <button class="btn" type="button" (click)="saveSettings()">Save changes</button>
+    </div>
+  </aside>
+</header>

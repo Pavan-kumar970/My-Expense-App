@@ -1,0 +1,89 @@
+:host { display: block; }
+
+.bill-reminder {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.reminders {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.reminder {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 12px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+.reminder:hover { box-shadow: var(--shadow-md); }
+
+.reminder__info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.reminder__icon {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+}
+.reminder__title { font-weight: 600; }
+.reminder__meta { color: var(--text-muted); font-size: var(--fs-sm); }
+
+.reminder__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  background: var(--surface-3);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.status.paid { background: rgba(16,185,129,0.12); color: #065f46; border-color: rgba(16,185,129,0.3); }
+.status.due-soon { background: rgba(245,158,11,0.12); color: #92400e; border-color: rgba(245,158,11,0.3); }
+.status.overdue { background: rgba(239,68,68,0.12); color: #7f1d1d; border-color: rgba(239,68,68,0.3); }
+
+.amount { font-weight: 700; }
+
+.actions { display: flex; align-items: center; gap: 8px; }
+.actions .btn-pay,
+.actions .btn-snooze {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter .2s, transform .02s, background .2s;
+}
+.actions .btn-pay { background: var(--primary); color: #fff; }
+.actions .btn-pay:hover { filter: brightness(1.05); }
+.actions .btn-pay:active { transform: translateY(1px); }
+.actions .btn-snooze { background: transparent; color: var(--text); border-color: var(--border); }
+
+@media (max-width: 640px) {
+  .reminder { grid-template-columns: 1fr; align-items: start; }
+  .reminder__right { justify-content: space-between; }
+}
+

@@ -1,0 +1,84 @@
+:host { display: block; }
+
+.expense-list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.filters { display: flex; align-items: center; gap: var(--space-3); }
+.filters .input { max-width: 260px; }
+
+.table-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+thead th {
+  background: var(--surface-3);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+tbody tr:hover td { background: #fafcff; }
+tbody tr:nth-child(even) td { background: #fcfdff; }
+
+.amount { font-weight: 700; white-space: nowrap; }
+.amount.positive { color: var(--success); }
+.amount.negative { color: var(--danger); }
+
+.category {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: var(--fs-xs);
+  background: var(--surface-3);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+.category.food { background: rgba(59,130,246,0.12); color: #1e3a8a; border-color: rgba(59,130,246,0.3); }
+.category.rent { background: rgba(96,165,250,0.12); color: #1e40af; border-color: rgba(96,165,250,0.3); }
+.category.utilities { background: rgba(245,158,11,0.12); color: #92400e; border-color: rgba(245,158,11,0.3); }
+.category.entertainment { background: rgba(139,92,246,0.12); color: #4c1d95; border-color: rgba(139,92,246,0.3); }
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: var(--space-6);
+}
+
+@media (max-width: 720px) {
+  .toolbar { flex-direction: column; align-items: stretch; }
+  .filters { width: 100%; }
+  .filters .input { width: 100%; max-width: none; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr { border-bottom: 1px solid var(--border); padding: var(--space-3); }
+  tbody td { border: none; padding: 6px 0; }
+}
+

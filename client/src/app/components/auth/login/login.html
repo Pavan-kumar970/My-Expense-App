@@ -1,0 +1,58 @@
+<div class="login">
+  <div class="card">
+    <div class="card-header">
+      <h2>Welcome back</h2>
+      <p>Please sign in to continue</p>
+    </div>
+    <form [formGroup]="form" (ngSubmit)="doLogin()" novalidate>
+      <div class="alert error" *ngIf="error">{{ error }}</div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" placeholder="you@example.com" />
+        <div class="error" *ngIf="form.controls['email'].touched && form.controls['email'].invalid">
+          <span *ngIf="form.controls['email'].errors?.['required']">Email is required.</span>
+          <span *ngIf="form.controls['email'].errors?.['email']">Enter a valid email.</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <div class="password">
+          <input id="password"
+                 [type]="showPassword ? 'text' : 'password'"
+                 formControlName="password"
+                 placeholder=""
+                 (keyup)="onPasswordKeyup($event)"
+          />
+          <button type="button" class="toggle" (click)="togglePassword()" [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+            <svg *ngIf="!showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            <svg *ngIf="showPassword" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3.98 8.223A10.477 10.477 0 0 0 1 12s4 8 11 8a10.5 10.5 0 0 0 7.192-2.808M10.584 10.586A2 2 0 1 0 13.415 13.42M1 1l22 22"/>
+            </svg>
+          </button>
+        </div>
+        <div class="hint" *ngIf="capsLockOn">Caps Lock is on</div>
+        <div class="error" *ngIf="form.controls['password'].touched && form.controls['password'].invalid">
+          <span *ngIf="form.controls['password'].errors?.['required']">Password is required.</span>
+          <span *ngIf="form.controls['password'].errors?.['minlength']">Minimum 6 characters.</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <label class="checkbox">
+          <input type="checkbox" formControlName="remember" />
+          <span>Remember me</span>
+        </label>
+        <a class="link" routerLink="/register">Create account</a>
+      </div>
+
+      <button class="primary" type="submit" [disabled]="form.invalid || loading">
+        <span *ngIf="!loading">Sign in</span>
+        <span *ngIf="loading">Signing in…</span>
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+<div class="bill-reminder">
+  <div class="toolbar">
+    <h2>Bills</h2>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="add()" novalidate>
+    <div class="row">
+      <input class="input" placeholder="Name" formControlName="name" />
+      <input class="input" type="number" step="0.01" placeholder="Amount" formControlName="amount" />
+      <input class="input" type="date" formControlName="dueDate" />
+      <label class="checkbox">
+        <input type="checkbox" formControlName="recurring" />
+        <span>Recurring</span>
+      </label>
+      <button class="btn" type="submit">Add</button>
+    </div>
+  </form>
+
+  <div class="alert error" *ngIf="error">{{ error }}</div>
+
+  <div class="reminders" *ngIf="items?.length; else emptyTpl">
+    <div class="reminder" *ngFor="let b of items">
+      <div class="reminder__info">
+        <div class="reminder__icon" aria-hidden="true">⏰</div>
+        <div>
+          <div class="reminder__title">{{ b.name }}</div>
+          <div class="reminder__meta">
+            <ng-container *ngIf="b.paid; else dueTpl">
+              <span class="badge success">Paid on {{ b.paidAt | date:'mediumDate' }}</span>
+            </ng-container>
+            <ng-template #dueTpl>
+              Due {{ b.dueDate | date:'mediumDate' }}
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="reminder__right">
+        <span class="status" [ngClass]="{ 'overdue': !isUpcoming(b.dueDate), 'due-soon': isUpcoming(b.dueDate), 'paid': !!b.paid }">{{ b.paid ? 'Paid' : (isUpcoming(b.dueDate) ? 'Due soon' : 'Overdue') }}</span>
+        <span class="amount">{{ b.amount | number:'1.2-2' }}</span>
+        <app-mark-as-paid-toggle
+          [id]="b.id"
+          [paid]="b.paid || false"
+          [paidAt]="b.paidAt || null"
+          resource="bill"
+          (changed)="onPaidChanged($event, b)"></app-mark-as-paid-toggle>
+        <button type="button" class="btn ghost" (click)="remove(b.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #emptyTpl>
+    <div class="empty">No bills yet. Add your first bill above.</div>
+  </ng-template>
+</div>

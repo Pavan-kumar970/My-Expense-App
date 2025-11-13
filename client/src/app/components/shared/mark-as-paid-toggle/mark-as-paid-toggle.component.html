@@ -1,0 +1,11 @@
+<button
+  type="button"
+  class="toggle"
+  role="switch"
+  [attr.aria-checked]="ariaChecked"
+  (click)="onToggle()"
+>
+  <span class="knob" [class.on]="paid"></span>
+  <span class="icon" aria-hidden="true">{{ paid ? '✔' : '⏳' }}</span>
+  <span class="label">{{ paid ? (paidAt ? ('Paid on ' + (paidAt | date:'mediumDate')) : 'Paid') : 'Unpaid' }}</span>
+</button>
